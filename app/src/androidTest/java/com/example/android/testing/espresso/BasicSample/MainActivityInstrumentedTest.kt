@@ -74,6 +74,26 @@ class MainActivityInstrumentedTest {
 
         onView(withId(R.id.show_text_view)).check(matches(withText("abcdef")))
     }
+    @Test
+    fun testValidateTextViewMainActivity() {
+     
+        onView(withId(R.id.textToBeChanged)).check(matches(withText("Hello Espresso!")))
+    }
+
+    @Test
+    fun testValidateTextViewShowTextActivity() {
+    
+        val context = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().targetContext
+        val intent = ShowTextActivity.newStartIntent(context, "Test Text")
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().startActivitySync(intent)
+
+  
+        Thread.sleep(2000) 
+
+  
+        onView(withId(R.id.show_text_view)).check(matches(withText("Test Text")))
+    }
 
 
 }

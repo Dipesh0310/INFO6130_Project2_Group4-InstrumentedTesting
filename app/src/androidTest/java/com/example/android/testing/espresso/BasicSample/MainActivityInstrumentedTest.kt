@@ -34,12 +34,23 @@ class MainActivityInstrumentedTest {
         onView(withId(R.id.editTextUserInput))
             .perform(typeText("123"), closeSoftKeyboard())
         onView(withId(R.id.activityChangeTextBtn)).perform(click())
+       Thread.sleep(2000)
+       onView(withId(R.id.show_text_view)).check(matches(withText("123")))
+    }
 
+    @Test
+    fun testEmptyText_sameActivity() {
+       
+        onView(withId(R.id.changeTextBt)).perform(click())
+        Thread.sleep(2000) 
+        onView(withId(R.id.textToBeChanged)).check(matches(withText("")))
+    }
 
-        Thread.sleep(2000)
-
-
-        onView(withId(R.id.show_text_view)).check(matches(withText("123")))
+    @Test
+    fun testEmptyText_newActivity() {
+      onView(withId(R.id.activityChangeTextBtn)).perform(click())
+       Thread.sleep(2000) 
+       onView(withId(R.id.show_text_view)).check(matches(withText("")))
     }
 
 
